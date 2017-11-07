@@ -15,7 +15,7 @@ namespace eejkee.Life
             public static readonly int CellsToLifeMin = 2;
         }
 
-        public readonly int Max = 200;
+        public readonly int Size = 200;
 
         private static readonly int RandomMax = 3;
         private static readonly int Period = 42;
@@ -44,12 +44,12 @@ namespace eejkee.Life
 
         private Cell[,] GenerateInitialState()
         {
-            var cells = new Cell[Max, Max];
+            var cells = new Cell[Size, Size];
             var rnd = new Random();
             var rndC = new Random(42);
-            for (var x = 0; x < Max; x++)
+            for (var x = 0; x < Size; x++)
             {
-                for (var y = 0; y < Max; y++)
+                for (var y = 0; y < Size; y++)
                 {
                     var cr = rndC.Next(1, 100);
                     var color = Color.FromArgb(255, (byte)(cr < 34 ? 255 : 1), (byte)(cr >= 34 && cr < 67 ? 255 : 1), (byte)(cr >= 67 ? 255 : 1));
@@ -62,10 +62,10 @@ namespace eejkee.Life
         private Task<Cell[,]> GenerateNewState(Cell[,] oldState) =>
             Task.Run(() =>
             {
-                var cells = new Cell[Max, Max];
-                for (var x = 0; x < Max; x++)
+                var cells = new Cell[Size, Size];
+                for (var x = 0; x < Size; x++)
                 {
-                    for (var y = 0; y < Max; y++)
+                    for (var y = 0; y < Size; y++)
                     {
                         var neighbors = GetNeighbors(x, y, oldState);
                         var neighborCount = neighbors.Count;
@@ -115,6 +115,6 @@ namespace eejkee.Life
                 (byte)(sumB / neibghs.Count));
         }
 
-        private int CheckIndex(int index) => index < 0 ? index += Max : index >= Max ? index -= Max : index;
+        private int CheckIndex(int index) => index < 0 ? index += Size : index >= Size ? index -= Size : index;
     }
 }

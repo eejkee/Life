@@ -30,9 +30,9 @@ namespace eejkee.Life
             {
                 var size = 50;
                 var dg = new DrawingGroup();
-                for (var x = 0; x < world.Max; x++)
+                for (var x = 0; x < world.Size; x++)
                 {
-                    for (var y = 0; y < world.Max; y++)
+                    for (var y = 0; y < world.Size; y++)
                     {
                         var cell = world.GetCell(x, y);
                         if (cell.State)
@@ -44,7 +44,7 @@ namespace eejkee.Life
                 }
                 var additionalSquares = new GeometryGroup();
                 dg.Children.Add(new GeometryDrawing(Brushes.White, null, new RectangleGeometry(new Rect(new Point(0, 0), new Size(1, 1)))));
-                dg.Children.Add(new GeometryDrawing(Brushes.White, null, new RectangleGeometry(new Rect(new Point(world.Max * size - 1, world.Max * size - 1), new Size(1, 1)))));
+                dg.Children.Add(new GeometryDrawing(Brushes.White, null, new RectangleGeometry(new Rect(new Point(world.Size * size - 1, world.Size * size - 1), new Size(1, 1)))));
                 var di = new DrawingImage(dg);
                 di.Freeze();
                 return di as ImageSource;
